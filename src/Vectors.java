@@ -39,6 +39,7 @@ public class Vectors {
             sum = sumElementsOfArray(rowVector);
             result.add(sum/(float)matrix.getCols());
         }
+        result = normalizeVector(result);
         return result;
     }
 }
