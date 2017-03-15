@@ -22,5 +22,23 @@ public class Vectors {
         return elementsSum;
     }
 
-
+    public static ArrayList<Float> computePriorityVectorFromMatrix(Matrix matrix){
+        ArrayList<Float> result = new ArrayList<>();
+        ArrayList<Float> columnVector;
+        ArrayList<Float> rowVector;
+        Matrix tmpMatrix = matrix.copy();
+        for(int i=0;i<matrix.getCols();i++) {
+            columnVector = matrix.getColByIndex(i);
+            columnVector = normalizeVector(columnVector);
+            tmpMatrix.setColByIndex(i, columnVector);
+        }
+        //tmpMatrix ma teraz przeskalowane kolumny
+        float sum;
+        for(int j=0;j<matrix.getRows();j++){
+            rowVector = tmpMatrix.getRowByIndex(j);
+            sum = sumElementsOfArray(rowVector);
+            result.add(sum/(float)matrix.getCols());
+        }
+        return result;
+    }
 }

@@ -55,4 +55,36 @@ public class MatrixTest {
         expected.add(3f);
         Assert.assertTrue(expected.equals(matrix.getRowByIndex(0)));
     }
+
+    @Test
+    public void copyTest(){
+        Matrix test = matrix.copy();
+        Assert.assertTrue(test.getValueByIndex(0,2).equals(3f));
+        Assert.assertTrue(test.getValueByIndex(1,2).equals(2f));
+    }
+
+    @Test
+    public void setRowTest(){
+        ArrayList<Float> row = new ArrayList<>();
+        row.add(0f);
+        row.add(0f);
+        row.add(0f);
+        matrix.setRowByIndex(0,row);
+        Assert.assertTrue(matrix.getValueByIndex(0,0).equals(0f));
+    }
+
+    @Test
+    public void setColTest(){
+        ArrayList<Float> col = new ArrayList<>();
+        col.add(9f);
+        col.add(9f);
+        col.add(9f);
+        matrix.setColByIndex(2,col);
+        Assert.assertTrue(matrix.getValueByIndex(2,2).equals(9f));
+    }
+
+    @Test
+    public void printMatrixToSoutTest(){
+        matrix.printMatrixToSout();
+    }
 }

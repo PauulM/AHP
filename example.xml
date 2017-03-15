@@ -35,6 +35,34 @@
                 </priority>
             </alternative>
         </criterium>
+
+        <criterium>
+            <name>rain</name>
+            <priority>
+                <value to="temperature">2</value>
+            </priority>
+            <alternative>
+                <name>rome</name>
+                <priority>
+                    <value to="barcelona">0.75</value>
+                    <value to="reykjavik">3</value>
+                </priority>
+            </alternative>
+            <alternative>
+                <name>barcelona</name>
+                <priority>
+                    <value to="rome">1.33</value>
+                    <value to="reykjavik">2</value>
+                </priority>
+            </alternative>
+            <alternative>
+                <name>reykjavik</name>
+                <priority>
+                    <value to="rome">0.33</value>
+                    <value to="barcelona">0.5</value>
+                </priority>
+            </alternative>
+        </criterium>
     </criterium>
 
     <criterium>

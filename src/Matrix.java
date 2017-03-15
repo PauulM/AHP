@@ -17,6 +17,13 @@ public class Matrix {
         rowsVector = new ArrayList<>();
     }
 
+    public Matrix copy(){
+        Matrix result = new Matrix(getRows(), getCols());
+        result.setInitialized(true);
+        result.setRowsVector(getRowsVector());//czy tu tworzy sie kopia czy referencja?
+        return result;
+    }
+
     public void initializeWithInt(float val){
         try {
             if (initialized) throw new Exception();
@@ -54,13 +61,26 @@ public class Matrix {
         return result;
     }
 
-//    public ArrayList<ArrayList<Float>> getRowsVector() {
-//        return rowsVector;
-//    }
+    public void setRowByIndex(int rowIndex, ArrayList<Float> row)throws RuntimeException{
+        rowsVector.set(rowIndex, row);
+    }
 
-//    public void setRowsVector(ArrayList<ArrayList<Float>> rowsVector) {
-//        this.rowsVector = rowsVector;
-//    }
+    public void setColByIndex(int colIndex, ArrayList<Float> col)throws RuntimeException{
+        for(int i=0;i<rows;i++){
+            rowsVector.get(i).set(colIndex, col.get(i));
+        }
+    }
+
+    private ArrayList<ArrayList<Float>> getRowsVector() {
+        return rowsVector;
+    }
+
+    private void setRowsVector(ArrayList<ArrayList<Float>> rowsVector) {
+        this.rowsVector = rowsVector;
+    }
+    private void setInitialized(boolean init){
+        this.initialized = init;
+    }
 
     public int getRows() {
         return rows;
@@ -76,5 +96,14 @@ public class Matrix {
 
     public void setCols(int cols) {
         this.cols = cols;
+    }
+
+    public void printMatrixToSout(){
+        for(ArrayList<Float> tmpRow : rowsVector){
+            for(Float tmp : tmpRow){
+                System.out.print(tmp + "      ");
+            }
+            System.out.print("\n");
+        }
     }
 }

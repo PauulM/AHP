@@ -23,4 +23,21 @@ public class VectorsTest {
         Assert.assertTrue(Math.abs(normVec.get(1) - 0.5f) < eps);
         Assert.assertTrue(Math.abs(normVec.get(2) - 0.125f) < eps);
     }
+
+    @Test
+    public void computePriorityVectorFromMatrixTest(){
+        Matrix matrix = new Matrix(3, 3);
+        matrix.initializeWithInt(1);
+        matrix.setValueByIndex(0.75f, 0, 1);
+        matrix.setValueByIndex(3f, 0, 2);
+        matrix.setValueByIndex(1.333333f, 1, 0);
+        matrix.setValueByIndex(2f, 1, 2);
+        matrix.setValueByIndex(0.333333f, 2, 0);
+        matrix.setValueByIndex(0.5f, 2, 1);
+
+        ArrayList<Float> vector = Vectors.computePriorityVectorFromMatrix(matrix);
+        for(Float tmp : vector){
+            System.out.print(tmp + ", ");
+        }
+    }
 }
