@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by pawma on 14.03.2017.
@@ -41,5 +42,48 @@ public class Vectors {
         }
         result = normalizeVector(result);
         return result;
+    }
+
+    public static Matrix createMatrixFromCriterium(Criterium criterium, HashMap<Integer, String> map){
+        Matrix matrix = null;
+        try {
+            ArrayList<Alternative> alternatives = criterium.getAlternativesList();
+            matrix = new Matrix(alternatives.size(), alternatives.size());
+            matrix.initializeWithInt(1f);
+//            HashMap<Integer, String> map = new HashMap<>();
+//            int c = 0;
+//            for(Alternative a : alternatives){
+//                map.put(c, a.getName());
+//                c++;
+//            }
+            for(int i=0; i<matrix.getRows(); i++){
+                for(int j=0; j<matrix.getCols(); j++){
+                    if(i==j)
+                        continue;
+                    String numeratorName = map.get(i);
+                    String denominatorName = map.get(j);
+                    matrix.setValueByIndex(
+                            findPriorityByNumAndDenomNames(numeratorName,denominatorName,criterium) , i, j);
+                }
+            }
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return matrix;
+    }
+
+    private static Float findPriorityByNumAndDenomNames(String num, String denom, Criterium criterium){
+        return criterium.findAlternativeByName(num).findPriorityToByName(denom);
+    }
+
+    public static HashMap<Integer, String> applyIdToAlternatives(ArrayList<Alternative> alternatives){
+        HashMap<Integer, String> map = new HashMap<>();
+        int c = 0;
+        for(Alternative a : alternatives){
+            map.put(c, a.getName());
+            c++;
+        }
+        return map;
     }
 }

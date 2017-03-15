@@ -8,33 +8,10 @@ import java.util.ArrayList;
  */
 public class XmlDataTest {
 
-//    @Test
-//    public void test(){
-//        XmlData xmlData = new XmlData("example.xml");
-//        xmlData.getByTagAndPrintName("criterium");
-//    }
-
     @Test
-    public void test2(){
+    public void test(){
         XmlData xmlData = new XmlData("example.xml");
         xmlData.initializeCriteriaList();
     }
-
-
-
-
-
-
-
-
-
-
-
-//    @Test
-//    public void getAllEqualLevelCriteriaToNodeListTest(){
-//        XmlData xmlData = new XmlData("example.xml");
-//        ArrayList<Node> list = xmlData.getAllEqualLevelCriteriaToNodeList(1);
-//        xmlData.getPriorityVectorFromCriteriaNodeList(list);
-//    }
 
 }

@@ -4,11 +4,19 @@ import java.util.ArrayList;
  * Created by pawma on 15.03.2017.
  */
 public class Criterium {
-    public String name;
-    public ArrayList<Criterium> subCriteriaList = new ArrayList<>();
-    public Criterium parentCriterium = null;
-    public ArrayList<Weight> weightsList = new ArrayList<>();
-    ArrayList<Alternative> alternativesList = new ArrayList<>();
+    private String name;
+    private ArrayList<Criterium> subCriteriaList = new ArrayList<>();
+    private Criterium parentCriterium = null;
+    private ArrayList<Weight> weightsList = new ArrayList<>();
+    private ArrayList<Alternative> alternativesList = new ArrayList<>();
+
+    public Alternative findAlternativeByName(String name){
+        for(Alternative a : alternativesList){
+            if(a.getName().equals(name))
+                return a;
+        }
+        return null;
+    }
 
     public ArrayList<Criterium> getSubCriteriaList() {
         return subCriteriaList;

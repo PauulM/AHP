@@ -56,25 +56,28 @@ public class XmlData {
                     handleChildList(childList.item(i), criterium);
                 }
                 else if(nodeType.equals("name")){
-                    parentCriterium.setName(childList.item(i).getTextContent());
+                    if(parentCriterium != null)
+                        parentCriterium.setName(childList.item(i).getTextContent());
                 }
                 else if(nodeType.equals("weight")){
                     Weight weight = new Weight();
                     Element e = (Element) childList.item(i);
                     weight.setTo(e.getAttribute("to"));
                     weight.setValue(Float.parseFloat(childList.item(i).getTextContent()));
-                    parentCriterium.addWeight(weight);
+                    if(parentCriterium != null)
+                        parentCriterium.addWeight(weight);
                 }
                 else if(nodeType.equals("alternative")){
                     Alternative alternative = handleAlternative(childList.item(i), parentCriterium);
-                    parentCriterium.addAlternative(alternative);
+                    if(parentCriterium != null)
+                        parentCriterium.addAlternative(alternative);
                 }
 
             }
         }
     }
 
-    public Alternative handleAlternative(Node parentNode, Criterium parentCriterium){
+    private Alternative handleAlternative(Node parentNode, Criterium parentCriterium){
         Alternative alternative = new Alternative();
         if(parentNode.getNodeType()==Node.ELEMENT_NODE){
             Element e = (Element) parentNode;
@@ -95,57 +98,8 @@ public class XmlData {
         return alternative;
     }
 
+    public ArrayList<Criterium> getCriteria(){
+        return this.criteria;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-//    public ArrayList<Node> getAllEqualLevelCriteriaToNodeList(int level){
-//        NodeList allCriteriaList = document.getElementsByTagName("criterium");
-//        ArrayList<Node> result = new ArrayList<>();
-//        for(int i=0;i<allCriteriaList.getLength();i++){
-//            Node node = allCriteriaList.item(i);
-//            if(node.getNodeType()==Node.ELEMENT_NODE){
-//                Element element = (Element) node;
-//                if(Integer.parseInt(element.getAttribute("level"))==level){
-//                    //System.out.println(element.getElementsByTagName("priority").item(0).getTextContent());
-//                    result.add(node);
-//                }
-//            }
-//        }
-//        return result;
-//    }
-//
-//    public ArrayList<Float> getPriorityVectorFromCriteriaNodeList(ArrayList<Node> list){
-//        ArrayList<Float> result = new ArrayList<>();
-//        for(Node tmp : list){
-//            if(tmp.getNodeType()==Node.ELEMENT_NODE){
-//                Element element = (Element) tmp;
-//                result.add(Float.parseFloat(element.
-//                        getElementsByTagName("priority").item(0).getTextContent()));
-//            }
-//        }
-//        return result;
-//    }
-//
-//
-//
-//    public void getByTagAndPrintName(String tag){
-//        NodeList list = document.getElementsByTagName(tag);
-//        for(int i=0; i<list.getLength();i++){
-//            if(list.item(i).getNodeType()==Node.ELEMENT_NODE){
-//                Element el = (Element) list.item(i);
-//                System.out.println(el.getElementsByTagName("name").item(0).getTextContent());
-//            }
-//
-//        }
-//    }
 }

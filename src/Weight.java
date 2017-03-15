@@ -2,8 +2,8 @@
  * Created by pawma on 15.03.2017.
  */
 public class Weight {
-    public String to;
-    public float value;
+    private String to;
+    private float value;
 
     public String getTo() {
         return to;

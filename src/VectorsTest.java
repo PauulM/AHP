@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -79,5 +80,16 @@ public class VectorsTest {
         for(Float tmp : vector){
             System.out.print(tmp + ", ");
         }
+    }
+
+    @Test
+    public void createMatrixFromCriteriumTest(){
+        XmlData xmlData = new XmlData("example.xml");
+        xmlData.initializeCriteriaList();
+
+        //WAZNE ZEBY PRZED ROZPOCZECIEM OBLICZEN USTALIC ID ALTERNATYW
+        //KOLEJNOSC ZOSTANIE USTALONA NA PODSTAWIE KOLEJNOSCI W XMLU DLA PIERWSZEGO KRYTERIUM
+        HashMap<Integer, String> ids = Vectors.applyIdToAlternatives(xmlData.getCriteria().get(3).getAlternativesList());
+        Vectors.createMatrixFromCriterium(xmlData.getCriteria().get(4), ids);
     }
 }
