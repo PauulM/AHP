@@ -25,7 +25,7 @@ public class VectorsTest {
     }
 
     @Test
-    public void computePriorityVectorFromMatrixTest(){
+    public void computePriorityVectorFromMatrixTest_DataSet1(){
         Matrix matrix = new Matrix(3, 3);
         matrix.initializeWithInt(1);
         matrix.setValueByIndex(0.75f, 0, 1);
@@ -34,6 +34,46 @@ public class VectorsTest {
         matrix.setValueByIndex(2f, 1, 2);
         matrix.setValueByIndex(0.333333f, 2, 0);
         matrix.setValueByIndex(0.5f, 2, 1);
+
+        ArrayList<Float> vector = Vectors.computePriorityVectorFromMatrix(matrix);
+        for(Float tmp : vector){
+            System.out.print(tmp + ", ");
+        }
+    }
+
+    @Test
+    public void computePriorityVectorFromMatrixTest_DataSet2(){
+        Matrix matrix = new Matrix(4, 4);
+        matrix.initializeWithInt(1);
+        matrix.setValueByIndex(0.5f, 0, 1);
+        matrix.setValueByIndex(0.25f, 0, 2);
+        matrix.setValueByIndex(3f, 0, 3);
+        matrix.setValueByIndex(2f, 1, 0);
+        matrix.setValueByIndex(0.5f, 1, 2);
+        matrix.setValueByIndex(2f, 1, 3);
+        matrix.setValueByIndex(4f, 2, 0);
+        matrix.setValueByIndex(2f, 2, 1);
+        matrix.setValueByIndex(2f, 2, 3);
+        matrix.setValueByIndex(0.333333f, 3, 0);
+        matrix.setValueByIndex(0.5f, 3, 1);
+        matrix.setValueByIndex(0.5f, 3, 2);
+
+        ArrayList<Float> vector = Vectors.computePriorityVectorFromMatrix(matrix);
+        for(Float tmp : vector){
+            System.out.print(tmp + ", ");
+        }
+    }
+
+    @Test
+    public void computePriorityVectorFromMatrixTest_DataSet3(){
+        Matrix matrix = new Matrix(3, 3);
+        matrix.initializeWithInt(1);
+        matrix.setValueByIndex(0.5f, 0, 1);
+        matrix.setValueByIndex(0.25f, 0, 2);
+        matrix.setValueByIndex(2f, 1, 0);
+        matrix.setValueByIndex(0.5f, 1, 2);
+        matrix.setValueByIndex(4f, 2, 0);
+        matrix.setValueByIndex(2f, 2, 1);
 
         ArrayList<Float> vector = Vectors.computePriorityVectorFromMatrix(matrix);
         for(Float tmp : vector){
