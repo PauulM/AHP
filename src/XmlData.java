@@ -6,6 +6,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class XmlData {
 
@@ -16,6 +17,7 @@ public class XmlData {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             this.document = builder.parse("example.xml");
+
         }
         catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -27,6 +29,36 @@ public class XmlData {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Node> getAllEqualLevelCriteriaToNodeList(int level){
+        NodeList allCriteriaList = document.getElementsByTagName("criterium");
+        ArrayList<Node> result = new ArrayList<>();
+        for(int i=0;i<allCriteriaList.getLength();i++){
+            Node node = allCriteriaList.item(i);
+            if(node.getNodeType()==Node.ELEMENT_NODE){
+                Element element = (Element) node;
+                if(Integer.parseInt(element.getAttribute("level"))==level){
+                    //System.out.println(element.getElementsByTagName("priority").item(0).getTextContent());
+                    result.add(node);
+                }
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Float> getPriorityVectorFromCriteriaNodeList(ArrayList<Node> list){
+        ArrayList<Float> result = new ArrayList<>();
+        for(Node tmp : list){
+            if(tmp.getNodeType()==Node.ELEMENT_NODE){
+                Element element = (Element) tmp;
+                result.add(Float.parseFloat(element.
+                        getElementsByTagName("priority").item(0).getTextContent()));
+            }
+        }
+        return result;
+    }
+
+
 
     public void getByTagAndPrintName(String tag){
         NodeList list = document.getElementsByTagName(tag);

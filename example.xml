@@ -2,13 +2,13 @@
 <goal>
     <name>Select a city</name>
 
-    <criterium>
+    <criterium level="0">
         <name>climate</name>
         <priority>
             <value to="sightseeing">0.5</value>
             <value to="environment">0.25</value>
         </priority>
-        <criterium>
+        <criterium level="1">
             <name>temperature</name>
             <priority>
                 <value to="rain">2</value>
@@ -36,10 +36,10 @@
             </alternative>
         </criterium>
 
-        <criterium>
+        <criterium level="1">
             <name>rain</name>
             <priority>
-                <value to="temperature">2</value>
+                <value to="temperature">0.5</value>
             </priority>
             <alternative>
                 <name>rome</name>
@@ -65,7 +65,7 @@
         </criterium>
     </criterium>
 
-    <criterium>
+    <criterium level="0">
         <name>sightseeing</name>
         <priority>
             <value to="climate">2</value>
@@ -94,7 +94,7 @@
         </alternative>
     </criterium>
 
-    <criterium>
+    <criterium level="0">
         <name>environment</name>
         <priority>
             <value to="climate">4</value>
