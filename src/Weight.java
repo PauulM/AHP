@@ -5,6 +5,7 @@ public class Weight {
     private String to;
     private float value;
 
+
     public String getTo() {
         return to;
     }

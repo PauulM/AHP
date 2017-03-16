@@ -6,6 +6,14 @@ import java.util.HashMap;
  */
 public class Vectors {
 
+    private HashMap<Integer, String> alternativesIDs;
+    private HashMap<Integer, String> criteriaIDs;
+
+    public Vectors(XmlData xmlData){
+        alternativesIDs = Vectors.applyIdToAlternatives(xmlData.getCriteria().get(0).getAlternativesList());
+        criteriaIDs = Vectors.applyIdToCriteria(xmlData.getCriteria());
+    }
+
     public static ArrayList<Float> normalizeVector(ArrayList<Float> vector){
         Float elementsSum = sumElementsOfArray(vector);
         ArrayList<Float> result = new ArrayList<>();
@@ -44,24 +52,18 @@ public class Vectors {
         return result;
     }
 
-    public static Matrix createMatrixFromCriterium(Criterium criterium, HashMap<Integer, String> map){
+    public Matrix createPriorityMatrixFromCriterium(Criterium criterium){//, HashMap<Integer, String> map){
         Matrix matrix = null;
         try {
             ArrayList<Alternative> alternatives = criterium.getAlternativesList();
             matrix = new Matrix(alternatives.size(), alternatives.size());
             matrix.initializeWithInt(1f);
-//            HashMap<Integer, String> map = new HashMap<>();
-//            int c = 0;
-//            for(Alternative a : alternatives){
-//                map.put(c, a.getName());
-//                c++;
-//            }
             for(int i=0; i<matrix.getRows(); i++){
                 for(int j=0; j<matrix.getCols(); j++){
                     if(i==j)
                         continue;
-                    String numeratorName = map.get(i);
-                    String denominatorName = map.get(j);
+                    String numeratorName = alternativesIDs.get(i);
+                    String denominatorName = alternativesIDs.get(j);
                     matrix.setValueByIndex(
                             findPriorityByNumAndDenomNames(numeratorName,denominatorName,criterium) , i, j);
                 }
@@ -71,6 +73,33 @@ public class Vectors {
             e.printStackTrace();
         }
         return matrix;
+    }
+
+    public Matrix createWeightMatrixFromSiblingCriteria(ArrayList<Criterium> siblingsCriteria){
+        Matrix matrix = null;
+        try{
+            for(Criterium c : siblingsCriteria){
+                matrix = new Matrix(siblingsCriteria.size(), siblingsCriteria.size());
+                matrix.initializeWithInt(1f);
+                for(int i=0; i<matrix.getRows(); i++) {
+                    for (int j = 0; j < matrix.getCols(); j++) {
+                        if(i==j)
+                            continue;
+                        //String numeratorName = criteriaIDs.get(i);
+                        String denominatorName = criteriaIDs.get(j);
+                        matrix.setValueByIndex(findWeightByNumAndDenomNames(denominatorName, c), i, j);
+                    }
+                }
+            }
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        return matrix;
+    }
+
+    private static Float findWeightByNumAndDenomNames( String denom, Criterium criterium){
+        return criterium.findWeightValueToByName(denom);
     }
 
     private static Float findPriorityByNumAndDenomNames(String num, String denom, Criterium criterium){
@@ -86,4 +115,34 @@ public class Vectors {
         }
         return map;
     }
+
+    public static HashMap<Integer, String> applyIdToCriteria(ArrayList<Criterium> criteria){
+        HashMap<Integer, String> map = new HashMap<>();
+        int c = 0;
+        for(Criterium a : criteria){
+            map.put(c, a.getName());
+            c++;
+        }
+        return map;
+    }
+
+    public ArrayList<Float> computeFinalVectorFromCriteriumList(ArrayList<Criterium> criteria){
+
+        ArrayList<Criterium> rootCriteria = new ArrayList<>();
+        for(Criterium r : rootCriteria)
+
+
+    }
+
+    private
+
+    private ArrayList<Criterium> findRootCriteria(ArrayList<Criterium> criteria){
+        ArrayList<Criterium> rootCriteria = new ArrayList<>();
+        for(Criterium c : criteria){
+            if(c.getParentCriterium() == null)
+                rootCriteria.add(c);
+        }
+        return rootCriteria;
+    }
+
 }

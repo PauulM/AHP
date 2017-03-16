@@ -18,6 +18,14 @@ public class Criterium {
         return null;
     }
 
+    public Float findWeightValueToByName(String to){
+        for(Weight w : weightsList){
+            if (w.getTo().equals(to))
+                return w.getValue();
+        }
+        return null;
+    }
+
     public ArrayList<Criterium> getSubCriteriaList() {
         return subCriteriaList;
     }
