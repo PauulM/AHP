@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Created by pawma on 14.03.2017.
  */
-public class Matrix {
+public class Matrix{
 
     private ArrayList<ArrayList<Float>> rowsVector;
     private int rows;

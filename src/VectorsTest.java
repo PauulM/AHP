@@ -91,4 +91,14 @@ public class VectorsTest {
         Vectors vectors = new Vectors(xmlData);
         vectors.createPriorityMatrixFromCriterium(xmlData.getCriteria().get(4));//, ids);
     }
+
+    @Test
+    public void createWeightMatrixFromSiblingCriteria(){
+        XmlData xmlData = new XmlData("example.xml");
+        xmlData.initializeCriteriaList();
+        Vectors vectors = new Vectors(xmlData);
+        vectors.createWeightMatrixFromSiblingCriteria(Vectors.findRootCriteria(xmlData.getCriteria()));
+    }
+
+
 }
