@@ -18,7 +18,7 @@ public class XmlData {
         factory.setIgnoringElementContentWhitespace(true);
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
-            this.document = builder.parse("example.xml");
+            this.document = builder.parse(fileName);
 
         }
         catch (ParserConfigurationException e) {

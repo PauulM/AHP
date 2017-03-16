@@ -88,7 +88,7 @@ public class VectorsTest {
         xmlData.initializeCriteriaList();
 
         //WAZNE ZEBY PRZED ROZPOCZECIEM OBLICZEN USTALIC ID ALTERNATYW
-        //KOLEJNOSC ZOSTANIE USTALONA NA PODSTAWIE KOLEJNOSCI W XMLU DLA PIERWSZEGO KRYTERIUM
+        //KOLEJNOSC KONCOWA ZOSTANIE USTALONA NA PODSTAWIE KOLEJNOSCI W XMLU DLA PIERWSZEGO KRYTERIUM
         HashMap<Integer, String> ids = Vectors.applyIdToAlternatives(xmlData.getCriteria().get(3).getAlternativesList());
         Vectors.createMatrixFromCriterium(xmlData.getCriteria().get(4), ids);
     }
