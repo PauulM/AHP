@@ -4,8 +4,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by pawma on 14.03.2017.
  */
@@ -90,6 +88,7 @@ public class VectorsTest {
         //WAZNE ZEBY PRZED ROZPOCZECIEM OBLICZEN USTALIC ID ALTERNATYW
         //KOLEJNOSC KONCOWA ZOSTANIE USTALONA NA PODSTAWIE KOLEJNOSCI W XMLU DLA PIERWSZEGO KRYTERIUM
         HashMap<Integer, String> ids = Vectors.applyIdToAlternatives(xmlData.getCriteria().get(3).getAlternativesList());
-        Vectors.createMatrixFromCriterium(xmlData.getCriteria().get(4), ids);
+        Vectors vectors = new Vectors(xmlData);
+        vectors.createPriorityMatrixFromCriterium(xmlData.getCriteria().get(4));//, ids);
     }
 }
