@@ -25,7 +25,7 @@
         </criterium>
         <criterium level="1">
             <name>rain</name>
-            <weight to="temperature">0.5</weight>
+            <weight to="temperature">1</weight>
             <alternative>
                 <name>rome</name>
                 <priority to="barcelona">0.75</priority>

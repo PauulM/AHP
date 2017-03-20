@@ -148,13 +148,20 @@ public class Vectors {
             vectorsVector.add(currentVector);
         }
         Matrix weightsMatrix = createWeightMatrixFromSiblingCriteria(criteria);
-        ArrayList<Float> prioVec = computePriorityVectorFromMatrix(weightsMatrix);
-        return linearCombination(prioVec, vectorsVector);
+        ArrayList<Float> weightVec = computePriorityVectorFromMatrix(weightsMatrix);
+        ArrayList<Float> linComb = linearCombination(weightVec, vectorsVector);
+        return linComb;
     }
 
     public ArrayList<Float> start(ArrayList<Criterium> criteria){
         ArrayList<Float> result = computeFinalVectorFromCriteriumList(findRootCriteria(criteria));
         return result;
+    }
+
+    public void printResultToSout(ArrayList<Float> vector){
+        for(int i=0; i<vector.size(); i++){
+            System.out.println(alternativesIDs.get(i) + ": " + vector.get(i));
+        }
     }
 
 

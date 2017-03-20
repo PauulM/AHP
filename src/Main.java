@@ -4,6 +4,6 @@ public class Main {
         XmlData xmlData = new XmlData("example.xml");
         xmlData.initializeCriteriaList();
         Vectors vectors = new Vectors(xmlData);
-        vectors.start(xmlData.getCriteria());
+        vectors.printResultToSout(vectors.start(xmlData.getCriteria()));
     }
 }
